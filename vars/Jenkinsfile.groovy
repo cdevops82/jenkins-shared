@@ -3,19 +3,27 @@ def call(Map pipelineParams) {
         agent any
         stages {
             stage('Checkout') {
-                git branch: pipelineParams.branch, url: pipelineParams.scmUrl
+                step {
+                    git branch: pipelineParams.branch, url: pipelineParams.scmUrl
+                }
             }
 
             stage('Build') {
-                sh 'echo Building project...'
+                step {
+                    sh 'echo Building project...'
+                }
             }
 
             stage('Test') {
-                sh 'echo Running tests...'
+                step {
+                    sh 'echo Running tests...'
+                }
             }
 
             stage('Deploy') {
-                sh "echo Deploying to ${pipelineParams.developmentServer}:${pipelineParams.serverPort}"
+                step{
+                    sh "echo Deploying to ${pipelineParams.developmentServer}:${pipelineParams.serverPort}"
+                }
             }
         }
     }
